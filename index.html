@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dispatch Board · Ted Kelly</title>
+<meta name="description" content="A dispatch board for service businesses: drag jobs to techs, see the day at a glance, and catch late warranty first calls before they cost you.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared/demo.css">
+<link rel="stylesheet" href="app.css">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+</head>
+<body>
+
+<div class="demo-bar"><a href="https://tedkelly.dev/">← Ted Kelly</a><span class="pill">DEMO</span><span>Fictional company & data</span><span class="spacer"></span><a href="https://github.com/TedKelly561/dispatch-board">View code</a></div>
+
+<header class="dh">
+  <div class="dh-title">
+    <div class="co">Summit Home Services · Dispatch</div>
+    <h1>Dispatch Board</h1>
+  </div>
+  <div class="daynav" role="group" aria-label="Choose day">
+    <button class="icon-btn" id="prevDay" type="button" aria-label="Previous day">‹</button>
+    <button class="btn ghost small" id="todayBtn" type="button">Today</button>
+    <button class="icon-btn" id="nextDay" type="button" aria-label="Next day">›</button>
+    <div class="daylabel" aria-live="polite"><strong id="dayName"></strong><span id="dayRel"></span></div>
+  </div>
+  <div class="dh-tools">
+    <div class="seg" role="group" aria-label="Color jobs by">
+      <button type="button" data-color="tech" aria-pressed="true">By tech</button>
+      <button type="button" data-color="status" aria-pressed="false">By status</button>
+    </div>
+    <button class="btn ghost small" id="resetBtn" type="button">Reset demo</button>
+  </div>
+</header>
+<p class="hint">Drag a job from the queue onto a tech's row to book it (snaps to 30 min). Drag blocks to reschedule, or back to the queue to unassign. On a phone or keyboard, open any job and use <b>Assign</b>.</p>
+
+<section class="alerts" id="alerts" aria-label="Alerts"></section>
+<div class="matches" id="matches" hidden></div>
+
+<main class="layout">
+  <aside class="queue" id="queue" aria-labelledby="queueTitle">
+    <div class="queue-head">
+      <h2 id="queueTitle">Unassigned <span class="count" id="queueCount"></span></h2>
+      <span class="muted small">Most urgent first</span>
+    </div>
+    <div class="dropnote" aria-hidden="true">Drop here to unassign</div>
+    <ul class="qlist" id="qlist"></ul>
+  </aside>
+
+  <section class="board-card" aria-labelledby="boardTitle">
+    <div class="board-top">
+      <h2 id="boardTitle">Schedule</h2>
+      <span class="muted small" id="daySummary"></span>
+      <span class="spacer"></span>
+      <div class="legend" id="legend" aria-hidden="true"></div>
+    </div>
+    <div class="placing" id="placing" hidden>
+      <span id="placingText"></span>
+      <button class="btn ghost small" id="cancelPlace" type="button">Cancel</button>
+    </div>
+    <div class="board-scroll" id="boardScroll">
+      <div class="board" id="board"></div>
+    </div>
+  </section>
+</main>
+
+<div class="backdrop" id="backdrop" hidden></div>
+<aside class="drawer" id="drawer" role="dialog" aria-modal="true" aria-labelledby="drTitle" hidden></aside>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<footer class="demo-foot">Summit Home Services, its techs, customers, warranty companies and claim numbers are fictional. Your changes are saved in this browser only. Built by Ted Kelly.</footer>
+
+<script src="shared/data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
