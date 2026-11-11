@@ -1,4 +1,4 @@
-// Dispatch Board demo. Plain JS, no build step. Data comes from shared/data.js (window.SUMMIT).
+// Dispatch Board demo. Plain JS, no build step. Data comes from ../shared/data.js (window.SUMMIT).
 // All times are the visitor's local time.
 (function () {
   'use strict';
@@ -265,7 +265,7 @@
     $('#board').innerHTML = html;
 
     const cap = S.techs.length * CAPACITY;
-    $('#daySummary').textContent = `${dayJobs.length} jobs · ${totalBooked}h booked of ${cap}h (${Math.round(totalBooked / cap * 100)}%)`;
+    $('#daySummary').textContent = `${dayJobs.length} job${dayJobs.length === 1 ? '' : 's'} · ${totalBooked}h booked of ${cap}h (${Math.round(totalBooked / cap * 100)}%)`;
     $('#legend').innerHTML = colorBy === 'tech'
       ? S.techs.map(t => `<span><i style="--c:${t.color}"></i>${esc(t.name.split(' ')[0])}</span>`).join('')
       : ['scheduled', 'en_route', 'in_progress', 'waiting_parts', 'completed'].map(s => `<span><i style="--c:${STATUS_COLOR[s]}"></i>${S.statusLabels[s]}</span>`).join('');
@@ -622,7 +622,12 @@
       else if (a === 'pick') startPlacing(j.id);
       else if (a === 'assign') {
         const f = formValues();
-        if (!f) { $('#drTech').focus(); $('#drWarns').innerHTML = '<span class="flag bad">Choose a tech first</span>'; return; }
+        if (!f) {
+          const noTech = !$('#drTech').value;
+          $(noTech ? '#drTech' : '#drDay').focus();
+          $('#drWarns').innerHTML = `<span class="flag bad">${noTech ? 'Choose a tech first' : 'Choose a day first'}</span>`;
+          return;
+        }
         place(j.id, f.techId, f.start);
       }
     }
