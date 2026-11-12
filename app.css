@@ -143,7 +143,7 @@ body.placing-mode .track { cursor: crosshair; }
 .b-cust { font-weight: 600; font-size: .8rem; }
 .b-issue { color: var(--ink-soft); }
 .b-foot { display: flex; gap: 4px; margin-top: 2px; }
-.sc { --sc: #64748b; display: inline-block; font-family: var(--mono); font-size: .64rem; font-weight: 500; padding: 0 6px; border-radius: 999px; white-space: nowrap; background: color-mix(in srgb, var(--sc) 16%, transparent); color: color-mix(in srgb, var(--sc) 70%, var(--ink)); }
+.sc { --sc: #64748b; display: inline-block; font-family: var(--mono); font-size: .64rem; font-weight: 500; padding: 0 6px; border-radius: 999px; white-space: nowrap; background: color-mix(in srgb, var(--sc) 16%, transparent); color: color-mix(in srgb, var(--sc) 55%, var(--ink)); }
 .flag { display: inline-block; font-family: var(--mono); font-size: .64rem; padding: 0 5px; border-radius: 999px; background: var(--warn-soft); color: var(--warn); white-space: nowrap; }
 .flag.bad { background: var(--bad-soft); color: var(--bad); }
 .block.conflict { box-shadow: 0 0 0 2px var(--warn); }

@@ -14,7 +14,7 @@
 </head>
 <body>
 
-<div class="demo-bar"><a href="https://tedkelly.dev/">← Ted Kelly</a><span class="pill">DEMO</span><span>Fictional company & data</span><span class="spacer"></span><a href="https://github.com/TedKelly561/dispatch-board">View code</a></div>
+<nav class="demo-bar" aria-label="Demo"><a href="https://tedkelly.dev/">← Ted Kelly</a><span class="pill">DEMO</span><span>Fictional company & data</span><span class="spacer"></span><a href="https://github.com/TedKelly561/dispatch-board">View code</a></nav>
 
 <header class="dh">
   <div class="dh-title">
@@ -35,7 +35,7 @@
     <button class="btn ghost small" id="resetBtn" type="button">Reset demo</button>
   </div>
 </header>
-<p class="hint">Drag a job from the queue onto a tech's row to book it (snaps to 30 min). Drag blocks to reschedule, or back to the queue to unassign. On a phone or keyboard, open any job and use <b>Assign</b>.</p>
+<section class="hint-wrap" aria-label="How to use the board"><p class="hint">Drag a job from the queue onto a tech's row to book it (snaps to 30 min). Drag blocks to reschedule, or back to the queue to unassign. On a phone or keyboard, open any job and use <b>Assign</b>.</p></section>
 
 <section class="alerts" id="alerts" aria-label="Alerts"></section>
 <div class="matches" id="matches" hidden></div>
