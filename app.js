@@ -363,7 +363,7 @@
         <div class="dr-sec"><h3>Status</h3>
           <div class="statusflow" aria-hidden="true">${S.statuses.map((s, i) => `<span class="${i < si ? 'past' : i === si ? 'cur' : ''}">${S.statusLabels[s]}</span>`).join('')}</div>
           <div class="form">
-            <div class="full"><label for="drStatus">Change status</label><select id="drStatus">${S.statuses.map(s => `<option value="${s}"${s === j.status ? ' selected' : ''}>${S.statusLabels[s]}</option>`).join('')}</select></div>
+            <div class="full"><label for="drStatus">Change status</label><select id="drStatus"${!j.techId || !j.scheduledStart ? ' aria-describedby="drStatusHint"' : ''}>${S.statuses.map(s => `<option value="${s}"${s === j.status ? ' selected' : ''}${s !== 'new' && (!j.techId || !j.scheduledStart) ? ' disabled' : ''}>${S.statusLabels[s]}</option>`).join('')}</select>${!j.techId || !j.scheduledStart ? '<p class="muted small" id="drStatusHint">Assign a tech and a time to move this job past New.</p>' : ''}</div>
           </div>
           <div class="actions">
             ${next && assigned ? `<button class="btn small" type="button" data-act="next">Mark ${S.statusLabels[next].toLowerCase()} →</button>` : ''}
@@ -434,6 +434,12 @@
   function setStatus(id, status) {
     const j = find(id);
     if (!j || j.status === status) return;
+    if (status !== 'new' && (!j.techId || !j.scheduledStart)) {
+      // A job nobody is booked on can't be scheduled, worked or completed: it would vanish from both the queue and the board.
+      renderDrawer();
+      toast(`Assign <b>${j.id}</b> to a tech and a time first`, [], false);
+      return;
+    }
     snapshot();
     if (status === 'new') { j.techId = null; j.scheduledStart = null; }
     j.status = status;
